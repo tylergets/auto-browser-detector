@@ -1,6 +1,6 @@
 {
   "project": "chromium-headless",
-  "timestamp": "2026-09-21T23:18:44.902Z",
+  "timestamp": "2026-09-21T23:32:00.478Z",
   "playwrightVersion": "1.63.0",
   "results": [
     {
@@ -51,7 +51,7 @@
     {
       "id": "connection-rtt",
       "detected": true,
-      "details": "connection.rtt === 0 (downlink 9, type 4g)"
+      "details": "connection.rtt === 0 (downlink 10, type 4g)"
     },
     {
       "id": "media-codecs",
@@ -107,6 +107,26 @@
       "id": "worker-navigator",
       "detected": false,
       "details": "Page and worker agree on userAgent, platform, language, languages, hardwareConcurrency"
+    },
+    {
+      "id": "cross-realm-functions",
+      "detected": false,
+      "details": "Compared 7 functions using iframe toString"
+    },
+    {
+      "id": "getter-receiver",
+      "detected": false,
+      "details": "6 navigator getters reject invalid receivers and construction"
+    },
+    {
+      "id": "iframe-fingerprint",
+      "detected": false,
+      "details": "Page and iframe agree on userAgent, appVersion, platform, vendor, language, languages, hardwareConcurrency, deviceMemory, maxTouchPoints"
+    },
+    {
+      "id": "canvas-readback",
+      "detected": false,
+      "details": "Of 1024 channels: 0 changed on readback, 0 changed between reads, 0 changed after drawImage"
     }
   ]
 }

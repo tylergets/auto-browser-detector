@@ -1,4 +1,4 @@
-import { test } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 import detectors from '../detectors/index.js';
 
 // Informational harness: each test runs one detection method inside a real page and
@@ -25,5 +25,8 @@ for (const detector of detectors) {
     });
     // Surface the outcome in the runner output without asserting on it.
     console.log(`[${testInfo.project.name}] ${detector.id}: detected=${result.detected} — ${result.details}`);
+    expect(result.error, result.details).not.toBe(true);
+    expect([true, false, null]).toContain(result.detected);
+    expect(typeof result.details).toBe('string');
   });
 }

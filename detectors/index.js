@@ -20,6 +20,10 @@ import navigatorLanguages from './navigator-languages.js';
 import pluginIntegrity from './plugin-integrity.js';
 import navigatorOverrides from './navigator-overrides.js';
 import workerNavigator from './worker-navigator.js';
+import crossRealmFunctions from './cross-realm-functions.js';
+import getterReceiver from './getter-receiver.js';
+import iframeFingerprint from './iframe-fingerprint.js';
+import canvasReadback from './canvas-readback.js';
 
 export default [
   navigatorWebdriver,
@@ -43,4 +47,8 @@ export default [
   pluginIntegrity,
   navigatorOverrides,
   workerNavigator,
+  crossRealmFunctions,
+  getterReceiver,
+  iframeFingerprint,
+  canvasReadback,
 ];

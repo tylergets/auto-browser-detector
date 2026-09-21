@@ -1,6 +1,6 @@
 {
   "project": "chromium-headed",
-  "timestamp": "2026-09-21T23:18:44.903Z",
+  "timestamp": "2026-09-21T23:32:00.478Z",
   "playwrightVersion": "1.63.0",
   "results": [
     {
@@ -46,12 +46,12 @@
     {
       "id": "window-dimensions",
       "detected": true,
-      "details": "viewport fills entire screen with no taskbar/dock reserved (inner 1280x720, outer 1267x769, screen 1280x720, avail 1280x720)"
+      "details": "viewport fills entire screen with no taskbar/dock reserved (inner 1280x720, outer 627x769, screen 1280x720, avail 1280x720)"
     },
     {
       "id": "connection-rtt",
       "detected": false,
-      "details": "connection.rtt === 100 ms (downlink 1.5, type 4g)"
+      "details": "connection.rtt === 50 ms (downlink 1.7, type 4g)"
     },
     {
       "id": "media-codecs",
@@ -107,6 +107,26 @@
       "id": "worker-navigator",
       "detected": true,
       "details": "languages: page=[\"en-US\"], worker=[\"en-US\",\"en\"]"
+    },
+    {
+      "id": "cross-realm-functions",
+      "detected": false,
+      "details": "Compared 7 functions using iframe toString"
+    },
+    {
+      "id": "getter-receiver",
+      "detected": false,
+      "details": "6 navigator getters reject invalid receivers and construction"
+    },
+    {
+      "id": "iframe-fingerprint",
+      "detected": false,
+      "details": "Page and iframe agree on userAgent, appVersion, platform, vendor, language, languages, hardwareConcurrency, deviceMemory, maxTouchPoints"
+    },
+    {
+      "id": "canvas-readback",
+      "detected": false,
+      "details": "Of 1024 channels: 0 changed on readback, 0 changed between reads, 0 changed after drawImage"
     }
   ]
 }
