@@ -1,0 +1,87 @@
+{
+  "project": "chromium-headless",
+  "timestamp": "2026-09-21T23:00:05.953Z",
+  "playwrightVersion": "1.63.0",
+  "results": [
+    {
+      "id": "navigator-webdriver",
+      "detected": true,
+      "details": "navigator.webdriver === true"
+    },
+    {
+      "id": "headless-user-agent",
+      "detected": true,
+      "details": "\"HeadlessChrome\" found in user agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36"
+    },
+    {
+      "id": "ua-client-hints",
+      "detected": true,
+      "details": "brand list contains \"HeadlessChrome\" (brands: HeadlessChrome 153, Not_A Brand 8, Chromium 153)"
+    },
+    {
+      "id": "window-chrome",
+      "detected": true,
+      "details": "window.chrome is missing in a browser claiming to be Chrome"
+    },
+    {
+      "id": "plugins-and-mimetypes",
+      "detected": true,
+      "details": "Chrome UA but 0 plugins and 0 MIME types (desktop Chrome reports 5 and 2)"
+    },
+    {
+      "id": "pdf-viewer",
+      "detected": true,
+      "details": "Chrome UA but navigator.pdfViewerEnabled === false (typical of headless)"
+    },
+    {
+      "id": "permissions-inconsistency",
+      "detected": true,
+      "details": "Notification.permission === \"denied\" but permissions.query reports \"prompt\""
+    },
+    {
+      "id": "webgl-vendor",
+      "detected": true,
+      "details": "Software renderer: Google Inc. (Google) / ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    },
+    {
+      "id": "window-dimensions",
+      "detected": true,
+      "details": "outer dimensions exactly equal viewport with no window chrome; viewport fills entire screen with no taskbar/dock reserved (inner 1280x720, outer 1280x720, screen 1280x720, avail 1280x720)"
+    },
+    {
+      "id": "connection-rtt",
+      "detected": true,
+      "details": "connection.rtt === 0 (downlink 9.5, type 4g)"
+    },
+    {
+      "id": "media-codecs",
+      "detected": false,
+      "details": "H.264: probably, AAC: probably, MP3: probably"
+    },
+    {
+      "id": "cdp-runtime-domain",
+      "detected": false,
+      "details": "Error.stack getter untouched by console serialization"
+    },
+    {
+      "id": "evaluation-stack-trace",
+      "detected": false,
+      "details": "No automation markers in Error.stack"
+    },
+    {
+      "id": "playwright-bindings",
+      "detected": false,
+      "details": "No known automation globals on window or document"
+    },
+    {
+      "id": "function-tostring",
+      "detected": false,
+      "details": "All 5 probed natives stringify as [native code]"
+    },
+    {
+      "id": "iframe-chrome",
+      "detected": true,
+      "details": "iframe navigator.webdriver === true"
+    }
+  ]
+}

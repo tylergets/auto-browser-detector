@@ -1,0 +1,87 @@
+{
+  "project": "chromium-headed",
+  "timestamp": "2026-09-21T23:00:05.954Z",
+  "playwrightVersion": "1.63.0",
+  "results": [
+    {
+      "id": "navigator-webdriver",
+      "detected": true,
+      "details": "navigator.webdriver === true"
+    },
+    {
+      "id": "headless-user-agent",
+      "detected": false,
+      "details": "No headless markers in user agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36"
+    },
+    {
+      "id": "ua-client-hints",
+      "detected": false,
+      "details": "Client hints consistent with UA string (brands: Chromium 153, Not_A Brand 8)"
+    },
+    {
+      "id": "window-chrome",
+      "detected": true,
+      "details": "window.chrome exists but lacks expected members: runtime"
+    },
+    {
+      "id": "plugins-and-mimetypes",
+      "detected": false,
+      "details": "5 plugins (PDF Viewer, Chrome PDF Viewer, Chromium PDF Viewer…), 2 MIME types"
+    },
+    {
+      "id": "pdf-viewer",
+      "detected": false,
+      "details": "navigator.pdfViewerEnabled === true"
+    },
+    {
+      "id": "permissions-inconsistency",
+      "detected": false,
+      "details": "Notification.permission === \"default\", permissions.query === \"prompt\" (consistent)"
+    },
+    {
+      "id": "webgl-vendor",
+      "detected": false,
+      "details": "Google Inc. (AMD) / ANGLE (AMD, AMD Radeon 780M Graphics (radeonsi phoenix ACO), OpenGL 4.6)"
+    },
+    {
+      "id": "window-dimensions",
+      "detected": true,
+      "details": "viewport fills entire screen with no taskbar/dock reserved (inner 1280x720, outer 1267x769, screen 1280x720, avail 1280x720)"
+    },
+    {
+      "id": "connection-rtt",
+      "detected": false,
+      "details": "connection.rtt === 100 ms (downlink 1.7, type 4g)"
+    },
+    {
+      "id": "media-codecs",
+      "detected": false,
+      "details": "H.264: probably, AAC: probably, MP3: probably"
+    },
+    {
+      "id": "cdp-runtime-domain",
+      "detected": false,
+      "details": "Error.stack getter untouched by console serialization"
+    },
+    {
+      "id": "evaluation-stack-trace",
+      "detected": false,
+      "details": "No automation markers in Error.stack"
+    },
+    {
+      "id": "playwright-bindings",
+      "detected": false,
+      "details": "No known automation globals on window or document"
+    },
+    {
+      "id": "function-tostring",
+      "detected": false,
+      "details": "All 5 probed natives stringify as [native code]"
+    },
+    {
+      "id": "iframe-chrome",
+      "detected": true,
+      "details": "iframe navigator.webdriver === true"
+    }
+  ]
+}

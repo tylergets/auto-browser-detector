@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>auto-browser-detector — bot detection method catalog</title>
+  <link rel="stylesheet" href="report.css">
+</head>
+<body>
+  <main>
+    <h1>Automated-browser detection catalog</h1>
+    <p class="subtitle">
+      Well-known techniques for detecting automated, agentic, and headless browsers, each recorded against
+      Playwright Chromium in headless and headed mode.
+      <a href="live.html"><strong>Test your own browser →</strong></a>
+    </p>
+
+    <div class="notice" id="notice" hidden></div>
+
+    <div class="summary" id="summary" hidden>
+      <div class="stat"><b id="stat-methods">–</b><span>methods cataloged</span></div>
+      <div class="stat"><b id="stat-headless">–</b><span>flag Playwright headless</span></div>
+      <div class="stat"><b id="stat-headed">–</b><span>flag Playwright headed</span></div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Method</th>
+            <th>How it works</th>
+            <th>Headless</th>
+            <th>Headed</th>
+          </tr>
+        </thead>
+        <tbody id="rows"><tr><td colspan="4">Loading…</td></tr></tbody>
+      </table>
+    </div>
+    <p class="meta" id="meta"></p>
+  </main>
+
+  <script type="module">
+    import detectors from './detectors/index.js';
+
+    const badge = (r, title) => {
+      if (!r) return '<span class="badge na" title="no recorded result">–</span>';
+      const t = title ? ` title="${esc(r.details)}"` : '';
+      return r.detected === true ? `<span class="badge detected"${t}>🚨 detected</span>`
+        : r.detected === false ? `<span class="badge clean"${t}>✅ clean</span>`
+        : `<span class="badge na"${t}>➖ n/a</span>`;
+    };
+
+    const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+    async function loadResults(project) {
+      try {
+        const res = await fetch(`results/${project}.json`, { cache: 'no-cache' });
+        if (!res.ok) return null;
+        return await res.json();
+      } catch {
+        return null;
+      }
+    }
+
+    const [headless, headed] = await Promise.all([
+      loadResults('chromium-headless'),
+      loadResults('chromium-headed'),
+    ]);
+    const byId = (run) => Object.fromEntries((run?.results || []).map((r) => [r.id, r]));
+    const headlessById = byId(headless);
+    const headedById = byId(headed);
+
+    document.getElementById('rows').innerHTML = detectors.map((d) => `
+      <tr>
+        <td class="method">${esc(d.name)}<span class="cat">${esc(d.category)} · ${esc(d.id)}</span></td>
+        <td class="desc">${esc(d.description)}</td>
+        <td>${badge(headlessById[d.id], true)}</td>
+        <td>${badge(headedById[d.id], true)}</td>
+      </tr>`).join('');
+
+    document.getElementById('stat-methods').textContent = detectors.length;
+    const flagCount = (m) => Object.values(m).filter((r) => r.detected === true).length;
+    document.getElementById('stat-headless').textContent = headless ? flagCount(headlessById) : '–';
+    document.getElementById('stat-headed').textContent = headed ? flagCount(headedById) : '–';
+    document.getElementById('summary').hidden = false;
+
+    const run = headless || headed;
+    if (run) {
+      document.getElementById('meta').textContent =
+        `Playwright ${run.playwrightVersion} · recorded ${new Date(run.timestamp).toLocaleString()} · hover a badge for details`;
+    } else {
+      const notice = document.getElementById('notice');
+      notice.textContent = 'No recorded Playwright results found — run "npx playwright test" to generate results/*.json.';
+      notice.hidden = false;
+    }
+  </script>
+</body>
+</html>

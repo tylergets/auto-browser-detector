@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Live browser check — auto-browser-detector</title>
+  <link rel="stylesheet" href="report.css">
+</head>
+<body>
+  <main>
+    <h1>Live browser check</h1>
+    <p class="subtitle">
+      Every cataloged detection method, run against <em>this</em> browser right now.
+      See the <a href="index.html">full report</a> for the catalog and recorded Playwright results.
+    </p>
+
+    <div class="summary" id="summary" hidden>
+      <div class="stat"><b id="stat-detected">–</b><span>methods flag this browser</span></div>
+      <div class="stat"><b id="stat-clean">–</b><span>report clean</span></div>
+      <div class="stat"><b id="stat-na">–</b><span>not applicable</span></div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Method</th><th>Result</th><th>Details</th></tr>
+        </thead>
+        <tbody id="rows"><tr><td colspan="3">Running detectors…</td></tr></tbody>
+      </table>
+    </div>
+    <p class="meta" id="meta"></p>
+  </main>
+
+  <script type="module">
+    import detectors from './detectors/index.js';
+
+    const badge = (detected) =>
+      detected === true ? '<span class="badge detected">🚨 detected</span>'
+      : detected === false ? '<span class="badge clean">✅ clean</span>'
+      : '<span class="badge na">➖ n/a</span>';
+
+    const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+    async function run() {
+      const results = [];
+      for (const d of detectors) {
+        let r;
+        try {
+          r = await d.detect();
+        } catch (err) {
+          r = { detected: null, details: `Detector threw: ${err.message}` };
+        }
+        results.push({ d, r });
+      }
+
+      document.getElementById('rows').innerHTML = results.map(({ d, r }) => `
+        <tr>
+          <td class="method">${esc(d.name)}<span class="cat">${esc(d.category)} · ${esc(d.id)}</span></td>
+          <td>${badge(r.detected)}</td>
+          <td class="details">${esc(r.details)}</td>
+        </tr>`).join('');
+
+      const count = (v) => results.filter(({ r }) => r.detected === v).length;
+      document.getElementById('stat-detected').textContent = count(true);
+      document.getElementById('stat-clean').textContent = count(false);
+      document.getElementById('stat-na').textContent = count(null);
+      document.getElementById('summary').hidden = false;
+      document.getElementById('meta').textContent =
+        `Ran ${results.length} methods at ${new Date().toLocaleString()} · ${navigator.userAgent}`;
+    }
+
+    // The Playwright harness loads this page with ?norun and evaluates detectors
+    // itself, so the page's own run doesn't interleave with the probe.
+    if (!new URLSearchParams(location.search).has('norun')) {
+      run();
+    } else {
+      document.getElementById('rows').innerHTML = '<tr><td colspan="3">Auto-run disabled (?norun)</td></tr>';
+    }
+  </script>
+</body>
+</html>
