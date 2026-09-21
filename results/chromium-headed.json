@@ -1,6 +1,6 @@
 {
   "project": "chromium-headed",
-  "timestamp": "2026-09-21T23:00:05.954Z",
+  "timestamp": "2026-09-21T23:18:44.903Z",
   "playwrightVersion": "1.63.0",
   "results": [
     {
@@ -51,7 +51,7 @@
     {
       "id": "connection-rtt",
       "detected": false,
-      "details": "connection.rtt === 100 ms (downlink 1.7, type 4g)"
+      "details": "connection.rtt === 100 ms (downlink 1.5, type 4g)"
     },
     {
       "id": "media-codecs",
@@ -82,6 +82,31 @@
       "id": "iframe-chrome",
       "detected": true,
       "details": "iframe navigator.webdriver === true"
+    },
+    {
+      "id": "selenium-attributes",
+      "detected": false,
+      "details": "No known Selenium root attributes"
+    },
+    {
+      "id": "navigator-languages",
+      "detected": false,
+      "details": "navigator.languages=[\"en-US\"]"
+    },
+    {
+      "id": "plugin-integrity",
+      "detected": false,
+      "details": "Native plugin/MIME objects with consistent links"
+    },
+    {
+      "id": "navigator-overrides",
+      "detected": false,
+      "details": "No instance overrides on probed navigator properties"
+    },
+    {
+      "id": "worker-navigator",
+      "detected": true,
+      "details": "languages: page=[\"en-US\"], worker=[\"en-US\",\"en\"]"
     }
   ]
 }

@@ -15,6 +15,11 @@ import evaluationStackTrace from './evaluation-stack-trace.js';
 import playwrightBindings from './playwright-bindings.js';
 import functionTostring from './function-tostring.js';
 import iframeChrome from './iframe-chrome.js';
+import seleniumAttributes from './selenium-attributes.js';
+import navigatorLanguages from './navigator-languages.js';
+import pluginIntegrity from './plugin-integrity.js';
+import navigatorOverrides from './navigator-overrides.js';
+import workerNavigator from './worker-navigator.js';
 
 export default [
   navigatorWebdriver,
@@ -33,4 +38,9 @@ export default [
   playwrightBindings,
   functionTostring,
   iframeChrome,
+  seleniumAttributes,
+  navigatorLanguages,
+  pluginIntegrity,
+  navigatorOverrides,
+  workerNavigator,
 ];
