@@ -20,14 +20,7 @@
       <div class="stat"><b id="stat-na">–</b><span>not applicable</span></div>
     </div>
 
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr><th>Method</th><th>Result</th><th>Details</th></tr>
-        </thead>
-        <tbody id="rows"><tr><td colspan="3">Running detectors…</td></tr></tbody>
-      </table>
-    </div>
+    <div id="results"><p>Running detectors…</p></div>
     <p class="meta" id="meta"></p>
   </main>
 
@@ -53,12 +46,31 @@
         results.push({ d, r });
       }
 
-      document.getElementById('rows').innerHTML = results.map(({ d, r }) => `
+      const groups = [
+        { id: 'detected', title: 'Detected', value: true },
+        { id: 'clean', title: 'Clean', value: false },
+        { id: 'na', title: 'Not applicable', value: null },
+      ];
+      document.getElementById('results').innerHTML = groups.map(({ id, title, value }) => {
+        const matches = results.filter(({ r }) => r.detected === value);
+        const rows = matches.map(({ d, r }) => `
         <tr>
           <td class="method">${esc(d.name)}<span class="cat">${esc(d.category)} · ${esc(d.id)}</span></td>
           <td>${badge(r.detected)}</td>
           <td class="details">${esc(r.details)}</td>
         </tr>`).join('');
+        return `
+          <section aria-labelledby="heading-${id}">
+            <h2 id="heading-${id}">${title} (${matches.length})</h2>
+            ${matches.length ? `
+              <div class="table-wrap">
+                <table>
+                  <thead><tr><th>Method</th><th>Result</th><th>Details</th></tr></thead>
+                  <tbody>${rows}</tbody>
+                </table>
+              </div>` : '<p class="meta">No methods in this group.</p>'}
+          </section>`;
+      }).join('');
 
       const count = (v) => results.filter(({ r }) => r.detected === v).length;
       document.getElementById('stat-detected').textContent = count(true);
@@ -74,7 +86,7 @@
     if (!new URLSearchParams(location.search).has('norun')) {
       run();
     } else {
-      document.getElementById('rows').innerHTML = '<tr><td colspan="3">Auto-run disabled (?norun)</td></tr>';
+      document.getElementById('results').innerHTML = '<p>Auto-run disabled (?norun)</p>';
     }
   </script>
 </body>
