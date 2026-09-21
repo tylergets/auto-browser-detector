@@ -3,9 +3,11 @@ export default {
   name: 'window.chrome object',
   category: 'environment',
   description:
-    'Real desktop Chrome exposes a window.chrome object populated with app, csi, loadTimes, and runtime ' +
-    'members. Headless Chromium historically omitted it entirely, and even new headless mode ships a ' +
-    'sparser object, so sites check both its presence and its expected shape.',
+    'Real desktop Chrome exposes a window.chrome object populated with app, csi, and loadTimes members. ' +
+    'Headless Chromium historically omitted it entirely, and even new headless mode ships a sparser ' +
+    'object, so sites check both its presence and its expected shape. chrome.runtime is not part of the ' +
+    'check: on normal pages it only appears when an installed extension lists the site in ' +
+    'externally_connectable, so its absence says nothing.',
   async detect() {
     const isChromeUA = /Chrome\//.test(navigator.userAgent) || /Chromium|Google Chrome/.test(
       (navigator.userAgentData?.brands || []).map((b) => b.brand).join(' ')
@@ -16,7 +18,7 @@ export default {
     if (!window.chrome) {
       return { detected: true, details: 'window.chrome is missing in a browser claiming to be Chrome' };
     }
-    const expected = ['app', 'csi', 'loadTimes', 'runtime'];
+    const expected = ['app', 'csi', 'loadTimes'];
     const missing = expected.filter((k) => !(k in window.chrome));
     if (missing.length) {
       return {
